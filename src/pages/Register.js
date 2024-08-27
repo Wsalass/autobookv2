@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../firebase/firebaseConfig'; // Asegúrate de que 'db' esté exportado desde aquí
+import { auth, db } from '../firebase/firebaseConfig'; 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 
@@ -13,14 +13,14 @@ const Register = () => {
   const [roles, setRoles] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch roles from Firestore
+
   useEffect(() => {
     const fetchRoles = async () => {
       try {
         const rolesCollection = collection(db, 'roles');
         const rolesSnapshot = await getDocs(rolesCollection);
         const rolesList = rolesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        console.log('Roles obtenidos:', rolesList); // Agregado para depuración
+        console.log('Roles obtenidos:', rolesList); 
         setRoles(rolesList);
       } catch (error) {
         console.error('Error al obtener roles:', error.message);
@@ -30,7 +30,7 @@ const Register = () => {
     fetchRoles();
   }, []);
 
-  // Handle form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -40,22 +40,21 @@ const Register = () => {
     }
 
     try {
-      // Create user in Firebase Authentication
+ 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Save additional user information in Firestore
+
       const userRef = collection(db, 'usuarios');
       await addDoc(userRef, {
         uid: user.uid,
         nombre: name,
         email: email,
-        rol_id: getRoleId(role),
-        fecha_nacimiento: null // Cambia esto según tus necesidades
+        rol_id: getRoleId(role)
       });
 
       alert('Registro exitoso.');
-      navigate('/login'); // Redirige al usuario a su página de inicio de sesión
+      navigate('/login'); 
 
     } catch (error) {
       console.error('Error durante el registro:', error.message);
@@ -63,9 +62,9 @@ const Register = () => {
     }
   };
   
-  // Get role ID based on role name
+  
   const getRoleId = (role) => {
-    const foundRole = roles.find(r => r.nombre === role); // Asegúrate de que el campo es 'nombre'
+    const foundRole = roles.find(r => r.nombre === role); 
     return foundRole ? foundRole.id : 1;
   };
 
