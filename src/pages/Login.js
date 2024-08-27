@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../firebase/firebaseConfig'; // Asegúrate de que 'auth' y 'db' estén exportados desde aquí
+import { auth, db } from '../firebase/firebaseConfig'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
@@ -13,11 +13,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // Iniciar sesión en Firebase Authentication
+   
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Consultar la base de datos para obtener el rol del usuario
+  
       const usersRef = collection(db, 'usuarios');
       const q = query(usersRef, where('email', '==', email));
       const querySnapshot = await getDocs(q);
@@ -26,22 +26,22 @@ const Login = () => {
         const userDoc = querySnapshot.docs[0].data();
         const rolId = userDoc.rol_id;
 
-        // Redirigir según el rol del usuario
+
         switch (rolId) {
-          case 1: // Estudiante
-            navigate('/dashboard');
+          case 1:
+            navigate('/catalog');
             break;
-          case 2: // Profesor
-            navigate('/dashboard');
+          case 2: 
+            navigate('/catalog');
             break;
-          case 3: // Funcionario
-            navigate('/dashboard');
+          case 3: 
+            navigate('/catalog');
             break;
-          case 4: // Administrador
-            navigate('/bookcrud');
+          case 4: 
+            navigate('/admin/books');
             break;
           default:
-            navigate('/'); // Redirige a una página predeterminada si el rol no está definido
+            navigate('/'); 
             break;
         }
       } else {
