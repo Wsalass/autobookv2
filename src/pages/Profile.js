@@ -13,7 +13,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       setIsLoading(true); 
-      setError(null); // Reset error state on new fetch
+      setError(null); 
       try {
         const currentUser = auth.currentUser;
 
@@ -49,7 +49,7 @@ const Profile = () => {
 
   const getRoleName = async (roleId) => {
     try {
-      const roleDoc = doc(db, 'roles', roleId.toString()); // Usando el rol_id para obtener el documento correspondiente en la colección 'roles'
+      const roleDoc = doc(db, 'roles', roleId.toString()); 
       const roleSnapshot = await getDoc(roleDoc);
       return roleSnapshot.exists() ? roleSnapshot.data().nombre || 'Rol desconocido' : 'Rol desconocido';
     } catch (error) {
