@@ -26,15 +26,15 @@ const Home = () => {
               setUserRole(roleSnapshot.data().nombre);
             } else {
               console.error('El rol del usuario no existe');
-              setUserRole(null); // Resetea el rol en caso de error
+              setUserRole(null);
             }
           } else {
             console.error('El documento del usuario no existe');
-            setUserRole(null); // Resetea el rol en caso de error
+            setUserRole(null); 
           }
         } catch (error) {
           console.error('Error al obtener el rol del usuario:', error.message);
-          setUserRole(null); // Resetea el rol en caso de error
+          setUserRole(null); 
         }
       } else {
         setIsLoggedIn(false);
