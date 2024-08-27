@@ -1,9 +1,9 @@
 // pages/UpdateInfo.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../firebase/firebaseConfig'; // Asegúrate de que 'db' esté exportado correctamente
+import { auth, db } from '../firebase/firebaseConfig'; 
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import Header from '../components/Header'; // Asegúrate de que Header esté exportado correctamente
+import Header from '../components/Header';
 
 const UpdateInfo = () => {
   const [user, setUser] = useState(null);
