@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebase/firebaseConfig'; // Asegúrate de tener configurada la conexión a Firestore
+import { db } from '../firebase/firebaseConfig';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { addDays, format } from 'date-fns'; // Usaremos date-fns para manejar la fecha
-import Header from '../components/Header'; // Asegúrate de que este componente esté importado correctamente
+import { addDays, format } from 'date-fns'; 
+import Header from '../components/Header'; 
 
 const LoanForm = () => {
   const [name, setName] = useState('');
@@ -124,7 +124,7 @@ const LoanForm = () => {
               ) : (
                 books.map(b => (
                   <option key={b.id} value={b.id}>
-                    {b.titulo} {/* Asumiendo que 'titulo' es un campo en la colección 'libros' */}
+                    {b.titulo} 
                   </option>
                 ))
               )}
